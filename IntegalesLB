@@ -1,0 +1,81 @@
+public class integralesLB {
+    public static void main(String[] args) {
+        /*
+    ejercicio 14
+    El area de la superfici de un lago se estima midiendo el ancho del lago en invervalos de 100m. Las medidas
+    tomadas se muestran en el grafico adjunto. Utilice integracion numericapara estdimar el area del lago.
+     */
+        System.out.println("\nEjercicio ejemplo DATOS");
+        double[] x = new double[]{0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
+        double[] y = new double[]{1, 0.99503719, 0.980580676, 0.957826285, 0.928476691, 0.894427191, 0.857492926, 0.819231921, 0.780868809, 0.743294146, 0.707106781};
+        System.out.println(trapecio(x,y));
+        System.out.println(simp3(x,y));
+        System.out.println(simp38(x,y));
+
+        System.out.println("\nEjercicio 14 DATOS");
+        double[] x14 = new double[]{0,100,200,300,400,500,600,700,800,900,1000};
+        double[] y14 = new double[]{0,300,380,340,230,240,320,375,345,110,0};
+        System.out.println(trapecio(x14,y14));
+        System.out.println(   simp3(x14,y14));
+        System.out.println(  simp38(x14,y14));
+
+        System.out.println("\nEjercicio 18 DATOS");
+        double[] x18 = new double[]{0,1,2,3,4,5,6,7};
+        double[] y18 = new double[]{0,14,39,69,95,114,129,139};
+        System.out.println(trapecio(x18,y18));
+        System.out.println(   simp3(x18,y18));
+        System.out.println(  simp38(x18,y18));
+
+        System.out.println("\nEjercicio 19");
+        double[] x19 = new double[]{0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80};
+        double[] y19 = new double[]{2.00, 2.000790859, 2.003161564, 2.007106515, 2.012616456, 2.019678579, 2.02827667, 2.038391293, 2.05, 2.063077571, 2.077596267, 2.093526107, 2.110835143, 2.129489742, 2.149454873, 2.170694373, 2.19317122};
+        System.out.println(trapecio(x19,y19));
+        System.out.println(   simp3(x19,y19));
+        System.out.println(  simp38(x19,y19));
+
+        System.out.println("\nEjercicio 20");
+        double[] x20 = new double[]{-299.25, -261.84375, -224.4375, -187.03125, -149.625, -112.21875, -74.8125, -3740625, 0.0, 37.40625, 74.8125, 112.21875, 149.625, 187.03125, 224.4375, 261.84375, 299.25};
+        double[] y20 = new double[]{1.000588230, 1.001245343, 1.002635552, 1.005573386, 1.011766959, 1.024760108, 1.051747155, 1.106729799, 1.214984907, 1.417204972, 1.770800391, 2.350116995, 3.252521931, 4.613692439, 6.630381047, 9.590863900, 13.9171480 };
+        System.out.println(trapecio(x20,y));
+        System.out.println(   simp3(x20,y));
+        System.out.println(  simp38(x20,y));
+
+
+    }
+
+    //Ecuacion ejericico 14
+
+    public static double trapecio(double[] x, double[] y){
+        System.out.println("POR METODO DE TRAPECIO");
+        double sum = 0, h;
+        h = x[1]-x[0];
+        for (int i = 1; i < y.length-1; i++) {
+            sum += y[i];
+        }
+        return h/2*(y[0]+y[y.length-1]+2*sum);
+    }
+
+    public static double simp3(double[] x, double[] y){
+        System.out.println("POR METODO DE SIMPSON 1/3");
+        double sumPar = 0, sumaImpar = 0, h;
+        h = x[1]-x[0];
+        for (int i = 1; i < y.length-1; i++) {
+            if (i%2==0) sumPar += y[i];
+            else sumaImpar += y[i];
+        }
+        return h/3*(y[0]+y[y.length-1]+2*sumPar+4*sumaImpar);
+    }
+
+    public static double simp38(double[] x, double[] y){
+        System.out.println("POR METODO DE SIMPSON 3/8");
+        double sumTer = 0, sumaResto = 0, h;
+        h = x[1]-x[0];
+        for (int i = 1; i < y.length-1; i++) {
+            if (i%3==0){
+                sumTer += y[i];
+            }
+            else sumaResto += y[i];
+        }
+        return 3*h/8*(y[0]+y[y.length-1]+2*sumTer+3*sumaResto);
+    }
+}
