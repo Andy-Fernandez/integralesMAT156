@@ -1,0 +1,172 @@
+public class EcuasLB {
+    public static void main(String[] args) {
+        System.out.println("EJERCICIO 30 ");
+        System.out.println("METODO DE EULER");
+        int a, b, n;
+        double h, tE[] , yE[];
+
+        a=0; b=2; n=16; h=0.5; //Asinamos datos
+        tE = new double[n+1];
+        yE = new double[n+1];
+        //tenemos la sentencia t(0) = 2
+        tE[0] = a; yE[0] = 2;
+        System.out.println(tE[0] + "\t" + yE[0]);
+        for (int i = 1; i <= n; i++) {
+            tE[i] = Math.round((tE[i-1]+h)*100.0)/100.0;
+            yE[i] = yE[i-1]+(e30(tE[i-1],yE[i-1]))*h; //aqui se aplica la función
+            System.out.println(tE[i] + "\t" + yE[i]);
+        }
+
+        System.out.println("\nMETODO DE HEUN 2DO ORDEN");
+        double t302do[] , y302do[], k1, k2;
+        t302do = new double[n+1];
+        y302do = new double[n+1];
+        t302do[0] = a; y302do[0] = 2;
+        System.out.println(t302do[0] + "\t" + y302do[0]);
+        for (int i = 1; i <= n; i++) {
+            t302do[i] = Math.round((t302do[i-1]+h)*100.0)/100.0;
+            k1 = (e30(t302do[i-1],y302do[i-1]));
+            k2 = (e30(t302do[i-1]+h,y302do[i-1] + k1*h));
+            y302do[i] = y302do[i-1] + (0.5*k1 + 0.5*k2)*h;
+            System.out.println(t302do[i] + "\t" + y302do[i]);
+        }
+
+        System.out.println("\nMETODO DE HEUN 4DO ORDEN");
+        double t304do[] , y304do[], k3, k4;
+        t304do = new double[n+1];
+        y304do = new double[n+1];
+        t304do[0] = a; y304do[0] = 2;
+        System.out.println(t304do[0] + "\t" + y304do[0]);
+        for (int i = 1; i <= n; i++) {
+            t304do[i] = Math.round((t304do[i-1]+h)*100.0)/100.0;
+            k1 = e30(t304do[i-1],y304do[i-1]);
+            k2 = e30(t304do[i-1] + 0.5*h,y304do[i-1] + k1*h*0.5);
+            k3 = e30(t304do[i-1] + 0.5*h,y304do[i-1] + k2*h*0.5);
+            k4 = e30(t304do[i-1] + h,y304do[i-1] + k3*h);
+            y304do[i] = y304do[i-1] + ((double)1/6)*(k1 + 2*k2 + 2*k3 + k4)*h;
+            System.out.println(t304do[i] + "\t" + y304do[i]);
+        }
+
+        System.out.println("\n");
+        e33Main();
+        System.out.println("\n");
+        e37Main();
+
+    }
+
+    //EJERCICIO EJEMPLO
+    public static double ejemplo(double x, double y){
+        return 0.7*y-Math.pow(x,2)+1;
+    }
+
+    //EJERCICIO 30
+    public static double e30(double x, double y){
+        return (2.0*x+1.0)/(y+2.0);
+    }
+
+    //EJERCICIO 33
+    public static double e33(double x, double y){
+        return 5*Math.pow(y,(double)2/3)-2*y;
+    }
+    public static void e33Main(){
+        System.out.println("EJERCICIO 33 ");
+        System.out.println("METODO DE EULER");
+        int a, n;double b;
+        double h, tE[] , yE[];
+
+        a=0; b=0.5;n=16; h=1; //Asinamos datos
+        tE = new double[n+1];
+        yE = new double[n+1];
+        tE[0] = a; yE[0] = b;
+        System.out.println(tE[0] + "\t" + yE[0]);
+        for (int i = 1; i <= n; i++) {
+            tE[i] = Math.round((tE[i-1]+h)*100.0)/100.0;
+            yE[i] = yE[i-1]+(e33(tE[i-1],yE[i-1]))*h; //aqui se aplica la función
+            System.out.println(tE[i] + "\t" + yE[i]);
+        }
+
+        System.out.println("\nMETODO DE HEUN 2DO ORDEN");
+        double t302do[] , y302do[], k1, k2;
+        t302do = new double[n+1];
+        y302do = new double[n+1];
+        t302do[0] = a; y302do[0] = b;
+        System.out.println(t302do[0] + "\t" + y302do[0]);
+        for (int i = 1; i <= n; i++) {
+            t302do[i] = Math.round((t302do[i-1]+h)*100.0)/100.0;
+            k1 = (e33(t302do[i-1],y302do[i-1]));
+            k2 = (e33(t302do[i-1]+h,y302do[i-1] + k1*h));
+            y302do[i] = y302do[i-1] + (0.5*k1 + 0.5*k2)*h;
+            System.out.println(t302do[i] + "\t" + y302do[i]);
+        }
+
+        System.out.println("\nMETODO DE HEUN 4DO ORDEN");
+        double t304do[] , y304do[], k3, k4;
+        t304do = new double[n+1];
+        y304do = new double[n+1];
+        t304do[0] = a; y304do[0] = b;
+        System.out.println(t304do[0] + "\t" + y304do[0]);
+        for (int i = 1; i <= n; i++) {
+            t304do[i] = Math.round((t304do[i-1]+h)*100.0)/100.0;
+            k1 = e33(t304do[i-1],y304do[i-1]);
+            k2 = e33(t304do[i-1] + 0.5*h,y304do[i-1] + k1*h*0.5);
+            k3 = e33(t304do[i-1] + 0.5*h,y304do[i-1] + k2*h*0.5);
+            k4 = e33(t304do[i-1] + h,y304do[i-1] + k3*h);
+            y304do[i] = y304do[i-1] + ((double)1/6)*(k1 + 2*k2 + 2*k3 + k4)*h;
+            System.out.println(t304do[i] + "\t" + y304do[i]);
+        }
+    }
+
+    //EJERCICIO 37
+    public static double e37(double x, double y){
+        return 0.000095*y*(5000-y);
+    }
+    public static void e37Main(){
+        System.out.println("EJERCICIO 37 ");
+        System.out.println("METODO DE EULER");
+        int a, n;
+        double b;
+        double h, tE[] , yE[];
+
+        a=0; b=100;n=16; h=(double) 1.25; //Asinamos datos
+        tE = new double[n+1];
+        yE = new double[n+1];
+        //tenemos la sentencia t(0) = 0.5
+        tE[0] = a; yE[0] = b;
+        System.out.println(tE[0] + "\t" + yE[0]);
+        for (int i = 1; i <= n; i++) {
+            tE[i] = Math.round((tE[i-1]+h)*100.0)/100.0;
+            yE[i] = yE[i-1]+(e37(tE[i-1],yE[i-1]))*h; //aqui se aplica la función
+            System.out.println(tE[i] + "\t" + yE[i]);
+        }
+
+        System.out.println("\nMETODO DE HEUN 2DO ORDEN");
+        double t302do[] , y302do[], k1, k2;
+        t302do = new double[n+1];
+        y302do = new double[n+1];
+        t302do[0] = a; y302do[0] = b;
+        System.out.println(t302do[0] + "\t" + y302do[0]);
+        for (int i = 1; i <= n; i++) {
+            t302do[i] = Math.round((t302do[i-1]+h)*100.0)/100.0;
+            k1 = (e37(t302do[i-1],y302do[i-1]));
+            k2 = (e37(t302do[i-1]+h,y302do[i-1] + k1*h));
+            y302do[i] = y302do[i-1] + (0.5*k1 + 0.5*k2)*h;
+            System.out.println(t302do[i] + "\t" + y302do[i]);
+        }
+
+        System.out.println("\nMETODO DE HEUN 4DO ORDEN");
+        double t304do[] , y304do[], k3, k4;
+        t304do = new double[n+1];
+        y304do = new double[n+1];
+        t304do[0] = a; y304do[0] = b;
+        System.out.println(t304do[0] + "\t" + y304do[0]);
+        for (int i = 1; i <= n; i++) {
+            t304do[i] = Math.round((t304do[i-1]+h)*100.0)/100.0;
+            k1 = e37(t304do[i-1],y304do[i-1]);
+            k2 = e37(t304do[i-1] + 0.5*h,y304do[i-1] + k1*h*0.5);
+            k3 = e37(t304do[i-1] + 0.5*h,y304do[i-1] + k2*h*0.5);
+            k4 = e37(t304do[i-1] + h,y304do[i-1] + k3*h);
+            y304do[i] = y304do[i-1] + ((double)1/6)*(k1 + 2*k2 + 2*k3 + k4)*h;
+            System.out.println(t304do[i] + "\t" + y304do[i]);
+        }
+    }
+}
